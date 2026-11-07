@@ -14,7 +14,8 @@ Your [Retro Diffusion](https://www.retrodiffusion.ai/) plan usage and balance in
   when the plan is nearly used up (10% left by default) or, without a plan, when the
   balance drops under $1.
 - **In the panel:**
-  - **Plan:** name, usage left with a bar, and the reset (or end) date.
+  - **Plan:** name, usage left with a bar, the reset (or end) date, and a
+    **Manage plan** button that opens your plans page on retrodiffusion.ai.
   - **Balance:** your prepaid USD balance, what the last 30 days of jobs would have
     cost at balance rates, and what your plan covered it for.
   - **Running now:** website and API jobs in use out of your limit.

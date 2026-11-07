@@ -15,6 +15,8 @@ Panel {
   manageIpc: false
 
   readonly property string siteUrl: "https://www.retrodiffusion.ai/"
+  // Where the web app's own "Manage plan" button goes.
+  readonly property string planUrl: "https://retrodiffusion.ai/app/balance#plans"
   readonly property string iconGlyph: "󰏘"      // nf-md-palette
   readonly property string refreshGlyph: "󰑐"   // nf-md-refresh
   readonly property string openGlyph: "󰏌"      // nf-md-open_in_new
@@ -267,7 +269,7 @@ Panel {
             foreground: root.foreground
             fontFamily: root.fontFamily
             fontSize: Style.font.bodySmall
-            onClicked: root.openSite()
+            onClicked: Qt.openUrlExternally(root.planUrl)
           }
         }
 
