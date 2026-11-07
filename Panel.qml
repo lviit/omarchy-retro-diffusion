@@ -168,7 +168,6 @@ Panel {
           meta: service.busy
             ? strings.t("updating", "Updating…")
             : (service.updatedAt ? strings.t("updated", "Updated %1").arg(root.formatTime(service.updatedAt)) : "")
-          detail: root.hasPlan ? root.plan.name : ""
           foreground: root.foreground
           fontFamily: root.fontFamily
           iconComponent: Component {
@@ -180,14 +179,44 @@ Panel {
               font.pixelSize: Style.font.display
             }
           }
+          // The plan badge sits here, beside the refresh button, rather than
+          // in PanelHero's `detail` slot: that slot rides the title line,
+          // while the trailing control is centred on the whole hero, so the
+          // two never lined up.
           trailingControl: Component {
-            PanelActionButton {
-              iconText: root.refreshGlyph
-              tooltipText: strings.t("action.refresh", "Refresh (R)")
-              foreground: root.foreground
-              fontFamily: root.fontFamily
-              enabled: !service.busy
-              onClicked: root.refreshAll()
+            Row {
+              spacing: Style.space(8)
+
+              BorderSurface {
+                visible: root.hasPlan
+                anchors.verticalCenter: parent.verticalCenter
+                implicitWidth: planBadge.implicitWidth + Style.space(10)
+                implicitHeight: planBadge.implicitHeight + Style.space(4)
+                color: "transparent"
+                borderSpec: Border.controlSpec("normal", root.foreground, Commons.Color.accent)
+                radius: Style.cornerRadius
+
+                Text {
+                  id: planBadge
+                  textFormat: Text.PlainText
+                  anchors.centerIn: parent
+                  text: root.hasPlan ? root.plan.name : ""
+                  color: Qt.darker(root.foreground, 1.4)
+                  font.family: root.fontFamily
+                  font.pixelSize: Style.font.body
+                  font.bold: true
+                }
+              }
+
+              PanelActionButton {
+                anchors.verticalCenter: parent.verticalCenter
+                iconText: root.refreshGlyph
+                tooltipText: strings.t("action.refresh", "Refresh (R)")
+                foreground: root.foreground
+                fontFamily: root.fontFamily
+                enabled: !service.busy
+                onClicked: root.refreshAll()
+              }
             }
           }
         }
