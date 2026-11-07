@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "id": "io.github.lviit.retro-diffusion",
+  "name": "Retro Diffusion",
+  "version": "0.1.0",
+  "author": "lviit",
+  "license": "MIT",
+  "description": "Retro Diffusion plan usage and balance in the Omarchy bar.",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "Panel.qml"
+  },
+  "barWidget": {
+    "displayName": "Retro Diffusion",
+    "description": "Click: usage panel. Middle click: refresh. Right click: open Retro Diffusion in the browser.",
+    "category": "AI",
+    "allowMultiple": false,
+    "defaultSection": "right",
+    "defaults": {
+      "autoRefresh": true,
+      "refreshIntervalSec": 300,
+      "barValue": "plan",
+      "showLabel": true,
+      "lowPlanPct": 10
+    },
+    "schema": [
+      {
+        "key": "autoRefresh",
+        "type": "boolean",
+        "label": "Refresh in the background",
+        "description": "Ask api.retrodiffusion.ai for your usage on a timer. When off, the widget only asks when you open the panel, middle-click it, or press R.",
+        "defaultValue": true
+      },
+      {
+        "key": "refreshIntervalSec",
+        "type": "integer",
+        "label": "Refresh interval (seconds)",
+        "description": "How often to ask the Retro Diffusion API for your usage. Opening the panel always refreshes.",
+        "min": 60,
+        "max": 3600,
+        "step": 30,
+        "defaultValue": 300
+      },
+      {
+        "key": "barValue",
+        "type": "enum",
+        "label": "Value shown on the bar",
+        "description": "plan: plan usage left (falls back to balance without an active plan). balance: prepaid USD balance.",
+        "options": [
+          "plan",
+          "balance"
+        ],
+        "defaultValue": "plan"
+      },
+      {
+        "key": "showLabel",
+        "type": "boolean",
+        "label": "Show the value next to the icon",
+        "description": "Horizontal bars only.",
+        "defaultValue": true
+      },
+      {
+        "key": "lowPlanPct",
+        "type": "integer",
+        "label": "Warn when plan usage left is at or below (%)",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "defaultValue": 10
+      }
+    ]
+  }
+}
